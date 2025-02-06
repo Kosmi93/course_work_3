@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Контроллер для обработки веб-запросов
+ */
 @RestController
 @RequestMapping("/recommendation")
 public class RecommendationsController {

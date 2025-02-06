@@ -6,6 +6,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.UUID;
+/**
+ *Реализация интерфейса RecommendationRuleSet для  продукта Top Saving
+ * Пользователь использует как минимум один продукт с типом DEBIT.
+ * Сумма пополнений по всем продуктам типа DEBIT больше или равна 50 000 ₽
+ *   ИЛИ Сумма пополнений по всем продуктам типа SAVING больше или равна 50 000 ₽.
+ * Сумма пополнений по всем продуктам типа DEBIT больше, чем сумма трат по всем продуктам типа DEBIT.
+ */
 
 @Component
 public class RuleTopSaving implements RecommendationRuleSet{
@@ -17,12 +24,14 @@ public class RuleTopSaving implements RecommendationRuleSet{
     @Override
     public Optional<Recommendation> getRecommendations(UUID users_id) {
         // Вариант 1 - несколько запросов
-/*        if (recommendationsRepository.haveProductType(users_id,"DEBIT") &&
+/*
+        if (recommendationsRepository.haveProductType(users_id,"DEBIT") &&
                 (recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT") >= 50_000 ||
                         recommendationsRepository.getSumAmount(users_id,"SAVING","DEPOSIT") >= 50_000 &&
                 recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT") >
                         recommendationsRepository.getSumAmount(users_id,"SAVING","DEPOSIT")
-        ))*/
+        ))
+*/
         // Вариант 2 - один запрос
             if (recommendationsRepository.haveTopSaving(users_id,users_id,users_id,users_id,users_id))
         {

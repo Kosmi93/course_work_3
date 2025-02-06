@@ -10,15 +10,19 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Сервис рекомендаций, который содержит один метод,
+ * в котором мы, по id пользователя,  возвращаем список рекомендаций для этого пользователя
+ * (в зависимости от того, подошел ли какой-то продукт пользователю,
+ * список может быть и пустым, и наполненным рекомендациями)
+ */
 @Service
 public class RecommendationsService {
 
     private List<RecommendationRuleSet> recommendationsRuleSetList;
-    private RecommendationsRepository recommendationsRepository;
 
-    public RecommendationsService(List<RecommendationRuleSet> recommendationsRuleSetList, RecommendationsRepository recommendationsRepository) {
+    public RecommendationsService(List<RecommendationRuleSet> recommendationsRuleSetList) {
         this.recommendationsRuleSetList = recommendationsRuleSetList;
-        this.recommendationsRepository = recommendationsRepository;
     }
 
     public List<Recommendation> getRecommendations(UUID users_id) {

@@ -9,6 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
+/**
+ * Класс с конфигурацией источника данных
+ */
 @Configuration
 public class RecommendationsDataSourceConfiguration {
 

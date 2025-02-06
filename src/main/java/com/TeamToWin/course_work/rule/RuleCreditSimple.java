@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ *Реализация интерфейса RecommendationRuleSet для  продукта Простой кредит
+ * Пользователь не использует продукты с типом CREDIT.
+ * Сумма пополнений по всем продуктам типа DEBIT больше, чем сумма трат по всем продуктам типа DEBIT.
+ * Сумма трат по всем продуктам типа DEBIT больше, чем 100 000 ₽.
+ */
+
 @Component
 public class RuleCreditSimple implements RecommendationRuleSet{
     private final RecommendationsRepository recommendationsRepository;
@@ -15,11 +22,11 @@ public class RuleCreditSimple implements RecommendationRuleSet{
     @Override
     public Optional<Recommendation> getRecommendations(UUID users_id) {
         // Вариант 1 - несколько запросов
-        if (!recommendationsRepository.haveProductType(users_id,"CREDIT") &&
+      /*  if (!recommendationsRepository.haveProductType(users_id,"CREDIT") &&
                 recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT")
                         > recommendationsRepository.getSumAmount(users_id,"DEBIT","WITHDRAW") &&
                 recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT") > 100_000
-        )
+        )*/
         // Вариант 2 - один запрос
         if (recommendationsRepository.haveCreditSimple(users_id,users_id,users_id,users_id))
         {

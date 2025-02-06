@@ -3,10 +3,15 @@ package com.TeamToWin.course_work.model;
 import java.util.Objects;
 import java.util.UUID;
 
+/*Класс рекомендация,  состоящий из полей id, «имя» и «текст».*/
+
 public class Recommendation {
     private UUID id;
     private String product_name;
     private String product_text;
+
+    public Recommendation() {
+    }
 
     public Recommendation(UUID id, String product_name, String product_text) {
         this.id = id;

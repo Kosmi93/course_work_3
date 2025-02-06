@@ -7,6 +7,13 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ *Реализация интерфейса RecommendationRuleSet для  продукта Invest 500
+ * Пользователь использует как минимум один продукт с типом DEBIT.
+ * Пользователь не использует продукты с типом INVEST.
+ * Сумма пополнений продуктов с типом SAVING больше 1000 ₽.
+ */
+
 @Component
 public class RuleInvest500 implements RecommendationRuleSet {
 

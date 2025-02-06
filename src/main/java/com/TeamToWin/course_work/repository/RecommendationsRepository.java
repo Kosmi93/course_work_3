@@ -7,6 +7,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/**
+ * Репозиторий для выполнения запросов в БД.
+ */
 @Repository
 public class RecommendationsRepository {
 
@@ -69,7 +72,7 @@ public class RecommendationsRepository {
                         "              and t.USER_ID = ?) >= 50000) " +
                         "      ) " +
                         "and ((select sum(t.AMOUNT) from TRANSACTIONS t " +
-                        "                                    inner join PUBLIC.PRODUCTS P on P.ID = T.PRODUCT_ID " +
+                        "                                   inner join PUBLIC.PRODUCTS P on P.ID = T.PRODUCT_ID " +
                         "      where p.type = 'DEBIT' and t.TYPE = 'DEPOSIT' " +
                         "        and t.USER_ID = ?) " +
                         "    >(select sum(t.AMOUNT) from TRANSACTIONS t " +
