@@ -22,18 +22,13 @@ public class RuleTopSaving implements RecommendationRuleSet{
         this.recommendationsRepository = recommendationsRepository;
     }
     @Override
-    public Optional<Recommendation> getRecommendations(UUID users_id) {
-        // Вариант 1 - несколько запросов
-/*
-        if (recommendationsRepository.haveProductType(users_id,"DEBIT") &&
-                (recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT") >= 50_000 ||
-                        recommendationsRepository.getSumAmount(users_id,"SAVING","DEPOSIT") >= 50_000 &&
-                recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT") >
-                        recommendationsRepository.getSumAmount(users_id,"SAVING","DEPOSIT")
+    public Optional<Recommendation> getRecommendations(UUID usersId) {
+        if (recommendationsRepository.haveProductType(usersId,"DEBIT") &&
+                (recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT") >= 50_000 ||
+                        recommendationsRepository.getSumAmount(usersId,"SAVING","DEPOSIT") >= 50_000 &&
+                recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT") >
+                        recommendationsRepository.getSumAmount(usersId,"SAVING","DEPOSIT")
         ))
-*/
-        // Вариант 2 - один запрос
-            if (recommendationsRepository.haveTopSaving(users_id,users_id,users_id,users_id,users_id))
         {
             return Optional.of(new Recommendation(
                     UUID.fromString("59efc529-2fff-41af-baff-90ccd7402925"),

@@ -31,10 +31,10 @@ public class RecommendationsController {
         this.recommendationsService = recommendationsService;
     }
 
-    @GetMapping("{users_id}")
-    public String getListOfRecommendationsForUser(@PathVariable("users_id") UUID users_id) {
-        return "user_id: " + users_id + ", \nrecommendations: "
-                +recommendationsService.getRecommendations(users_id);
+    @GetMapping("{usersId}")
+    public String getListOfRecommendationsForUser(@PathVariable("usersId") UUID usersId) {
+        return "userId: " + usersId + ", \nrecommendations: "
+                +recommendationsService.getRecommendations(usersId);
     }
 
 }

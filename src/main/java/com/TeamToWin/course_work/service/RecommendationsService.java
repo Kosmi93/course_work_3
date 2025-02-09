@@ -25,11 +25,11 @@ public class RecommendationsService {
         this.recommendationsRuleSetList = recommendationsRuleSetList;
     }
 
-    public List<Recommendation> getRecommendations(UUID users_id) {
+    public List<Recommendation> getRecommendations(UUID usersId) {
         List<Recommendation> recommendationsList = new ArrayList<>();
 
         for (RecommendationRuleSet recommendationRuleSet : recommendationsRuleSetList) {
-            Optional<Recommendation> recommendations = recommendationRuleSet.getRecommendations(users_id);
+            Optional<Recommendation> recommendations = recommendationRuleSet.getRecommendations(usersId);
             if (recommendations.isPresent()) {
                 recommendationsList.add(recommendations.get());
             }
