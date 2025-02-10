@@ -11,12 +11,28 @@ import java.util.UUID;
 @Setter
 @Getter
 public class UserRecommendation {
-    UUID userId;
-    List<Recommendation> recommendations;
+    private UUID userId;
+    private List<Recommendation> recommendations;
 
     public UserRecommendation(UUID usersId, List<Recommendation> recommendations) {
         this.userId = usersId;
         this.recommendations = recommendations;
 
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    public List<Recommendation> getRecommendations() {
+        return recommendations;
+    }
+
+    public void setRecommendations(List<Recommendation> recommendations) {
+        this.recommendations = recommendations;
     }
 }
