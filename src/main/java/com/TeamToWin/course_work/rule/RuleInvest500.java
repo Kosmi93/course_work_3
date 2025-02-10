@@ -25,15 +25,12 @@ public class RuleInvest500 implements RecommendationRuleSet {
             this.recommendationsRepository = recommendationsRepository;
         }
         @Override
-        public Optional<Recommendation> getRecommendations (UUID users_id){
-        // Вариант 1 - несколько запросов
-            /*if (recommendationsRepository.haveProductType(users_id,"DEBIT")     &&
-                    !recommendationsRepository.haveProductType(users_id,"INVEST") &&
-                   recommendationsRepository.getSumAmount(users_id,"SAVING","DEPOSIT") > 1000
-            )*/
-        // Вариант 2 - один запрос
-            if (recommendationsRepository.haveInvest500(users_id,users_id)){
-
+        public Optional<Recommendation> getRecommendations (UUID usersId){
+            if (recommendationsRepository.haveProductType(usersId,"DEBIT")     &&
+                    !recommendationsRepository.haveProductType(usersId,"INVEST") &&
+                   recommendationsRepository.getSumAmount(usersId,"SAVING","DEPOSIT") > 1000
+            )
+            {
                 return Optional.of(new Recommendation(UUID.fromString("147f6a0f-3b91-413b-ab99-87f081d60d5a"),
                         "Invest 500",
                         "Откройте свой путь к успеху с индивидуальным инвестиционным счетом (ИИС) от нашего банка! " +

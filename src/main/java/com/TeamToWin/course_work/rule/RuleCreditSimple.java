@@ -1,9 +1,11 @@
 package com.TeamToWin.course_work.rule;
 
+import com.TeamToWin.course_work.dto.UserRecommendation;
 import com.TeamToWin.course_work.model.Recommendation;
 import com.TeamToWin.course_work.repository.RecommendationsRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,15 +22,13 @@ public class RuleCreditSimple implements RecommendationRuleSet{
     public RuleCreditSimple(RecommendationsRepository recommendationsRepository) {
         this.recommendationsRepository = recommendationsRepository;}
     @Override
-    public Optional<Recommendation> getRecommendations(UUID users_id) {
-        // Вариант 1 - несколько запросов
-      /*  if (!recommendationsRepository.haveProductType(users_id,"CREDIT") &&
-                recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT")
-                        > recommendationsRepository.getSumAmount(users_id,"DEBIT","WITHDRAW") &&
-                recommendationsRepository.getSumAmount(users_id,"DEBIT","DEPOSIT") > 100_000
-        )*/
-        // Вариант 2 - один запрос
-        if (recommendationsRepository.haveCreditSimple(users_id,users_id,users_id,users_id))
+    public Optional<Recommendation> getRecommendations(UUID usersId) {
+
+       if (!recommendationsRepository.haveProductType(usersId,"CREDIT") &&
+                recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT")
+                        > recommendationsRepository.getSumAmount(usersId,"DEBIT","WITHDRAW") &&
+                recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT") > 100_000
+        )
         {
             return Optional.of(new Recommendation(
                     UUID.fromString("ab138afb-f3ba-4a93-b74f-0fcee86d447f"),
@@ -45,7 +45,9 @@ public class RuleCreditSimple implements RecommendationRuleSet{
                             "Широкий выбор кредитных продуктов. Мы предлагаем кредиты на различные цели: покупку " +
                             "недвижимости, автомобиля, образование, лечение и многое другое.\n" +
                             "Не упустите возможность воспользоваться выгодными условиями кредитования от нашей компании!"));
+
         }
+
         return Optional.empty();
     }
 

@@ -9,6 +9,6 @@ import java.util.UUID;
     возвращает объект рекомендации или null.*/
 public interface RecommendationRuleSet {
 
-    Optional<Recommendation> getRecommendations(UUID users_id);
+    Optional<Recommendation> getRecommendations(UUID usersId);
 
 }
