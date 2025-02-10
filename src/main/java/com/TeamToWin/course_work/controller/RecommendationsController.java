@@ -5,6 +5,7 @@ import com.TeamToWin.course_work.repository.RecommendationsRepository;
 import com.TeamToWin.course_work.rule.RecommendationRuleSet;
 import com.TeamToWin.course_work.service.RecommendationsService;
 */
+import com.TeamToWin.course_work.dto.UserRecommendation;
 import com.TeamToWin.course_work.repository.RecommendationsRepository;
 import com.TeamToWin.course_work.service.RecommendationsService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -32,9 +34,8 @@ public class RecommendationsController {
     }
 
     @GetMapping("{usersId}")
-    public String getListOfRecommendationsForUser(@PathVariable("usersId") UUID usersId) {
-        return "userId: " + usersId + ", \nrecommendations: "
-                +recommendationsService.getRecommendations(usersId);
+    public Optional<UserRecommendation> getListOfRecommendationsForUser(@PathVariable("usersId") UUID usersId) {
+        return recommendationsService.getRecommendations(usersId);
     }
 
 }

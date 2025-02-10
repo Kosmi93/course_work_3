@@ -1,9 +1,11 @@
 package com.TeamToWin.course_work.rule;
 
+import com.TeamToWin.course_work.dto.UserRecommendation;
 import com.TeamToWin.course_work.model.Recommendation;
 import com.TeamToWin.course_work.repository.RecommendationsRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,6 +23,7 @@ public class RuleCreditSimple implements RecommendationRuleSet{
         this.recommendationsRepository = recommendationsRepository;}
     @Override
     public Optional<Recommendation> getRecommendations(UUID usersId) {
+
        if (!recommendationsRepository.haveProductType(usersId,"CREDIT") &&
                 recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT")
                         > recommendationsRepository.getSumAmount(usersId,"DEBIT","WITHDRAW") &&
@@ -42,7 +45,9 @@ public class RuleCreditSimple implements RecommendationRuleSet{
                             "Широкий выбор кредитных продуктов. Мы предлагаем кредиты на различные цели: покупку " +
                             "недвижимости, автомобиля, образование, лечение и многое другое.\n" +
                             "Не упустите возможность воспользоваться выгодными условиями кредитования от нашей компании!"));
+
         }
+
         return Optional.empty();
     }
 
