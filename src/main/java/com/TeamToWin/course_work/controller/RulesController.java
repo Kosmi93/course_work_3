@@ -1,8 +1,8 @@
 package com.TeamToWin.course_work.controller;
 
-import com.TeamToWin.course_work.dto.Recommendation;
+import com.TeamToWin.course_work.model.RecommendationRule;
+import com.TeamToWin.course_work.model.Rule;
 import com.TeamToWin.course_work.service.RulesService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,26 +16,31 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/rule")
 public class RulesController {
-    private final RulesService service;
-
-    public RulesController( RulesService service) {
-        this.service = service;
+    private final RulesService rulesService;
+    public RulesController(RulesService rulesService) {
+        this.rulesService = rulesService;
     }
 
+/*
     @PostMapping
-    public ResponseEntity<Recommendation> addRule (@RequestBody Recommendation recommendation) {
-        return ResponseEntity.of(service.save(recommendation));
+    public ResponseEntity<Rule> addRule (@RequestBody Rule rule){
+        //прописать сохранение
+        return rulesService.addRule(rule);
     }
-
+*/
+    @PostMapping
+    public RecommendationRule addRecommendation (@RequestBody RecommendationRule recommendationRule){
+        return rulesService.addRecommendation(recommendationRule);
+    }
+    //поправить должен возвращать data
     @GetMapping
-    public List<Recommendation> getAllRules (){
-        return service.getAll();
+    public ResponseEntity<List<Rule>> getAllRules (){
+        return rulesService.getAllRules();
     }
 
     @DeleteMapping("{rule_id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRule (@PathVariable("rule_id") UUID ruleId) {
-        service.deleteById(ruleId);
+        rulesService.deleteRule(ruleId);
     }
 
 }

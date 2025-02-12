@@ -1,22 +1,38 @@
 package com.TeamToWin.course_work.service;
 
-import com.TeamToWin.course_work.dto.Recommendation;
+import com.TeamToWin.course_work.model.RecommendationRule;
+import com.TeamToWin.course_work.model.Rule;
+import com.TeamToWin.course_work.repository.RuleRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class RulesService {
-    public List<Recommendation> getAll() {
+
+    private final RuleRepository ruleRepository;
+
+    public RulesService(RuleRepository ruleRepository) {
+        this.ruleRepository = ruleRepository;
+    }
+
+    public ResponseEntity<List<Rule>> getAllRules() {
         return null;
     }
 
-    public void deleteById(UUID ruleId) {
+    public ResponseEntity<Rule> addRule(Rule rule) {
+        return null;
+
     }
 
-    public Optional<Recommendation> save(Recommendation recommendation) {
-        return Optional.empty();
+    public void deleteRule(UUID ruleId) {
+
+    }
+
+    public RecommendationRule addRecommendation(RecommendationRule recommendationRule) {
+        return ruleRepository.addRecommendations(recommendationRule);
+
     }
 }

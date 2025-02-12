@@ -6,30 +6,32 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 import java.util.UUID;
+
 /**
- *Реализация интерфейса RecommendationRuleSet для  продукта Top Saving
+ * Реализация интерфейса RecommendationRuleSet для  продукта Top Saving
  * Пользователь использует как минимум один продукт с типом DEBIT.
  * Сумма пополнений по всем продуктам типа DEBIT больше или равна 50 000 ₽
- *   ИЛИ Сумма пополнений по всем продуктам типа SAVING больше или равна 50 000 ₽.
+ * ИЛИ Сумма пополнений по всем продуктам типа SAVING больше или равна 50 000 ₽.
  * Сумма пополнений по всем продуктам типа DEBIT больше, чем сумма трат по всем продуктам типа DEBIT.
  */
 
 @Component
-public class RuleTopSaving implements RecommendationRuleSet{
+public class RuleTopSaving implements RecommendationRuleSet {
 
     private final RecommendationsRepository recommendationsRepository;
+
     public RuleTopSaving(RecommendationsRepository recommendationsRepository) {
         this.recommendationsRepository = recommendationsRepository;
     }
+
     @Override
     public Optional<Recommendation> getRecommendations(UUID usersId) {
-        if (recommendationsRepository.haveProductType(usersId,"DEBIT") &&
-                (recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT") >= 50_000 ||
-                        recommendationsRepository.getSumAmount(usersId,"SAVING","DEPOSIT") >= 50_000 &&
-                recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT") >
-                        recommendationsRepository.getSumAmount(usersId,"SAVING","DEPOSIT")
-        ))
-        {
+        if (recommendationsRepository.haveProductType(usersId, "DEBIT") &&
+                (recommendationsRepository.getSumAmount(usersId, "DEBIT", "DEPOSIT") >= 50_000 ||
+                        recommendationsRepository.getSumAmount(usersId, "SAVING", "DEPOSIT") >= 50_000 &&
+                                recommendationsRepository.getSumAmount(usersId, "DEBIT", "DEPOSIT") >
+                                        recommendationsRepository.getSumAmount(usersId, "SAVING", "DEPOSIT")
+                )) {
             return Optional.of(new Recommendation(
                     UUID.fromString("59efc529-2fff-41af-baff-90ccd7402925"),
                     "Top Saving",
