@@ -1,7 +1,8 @@
 package com.TeamToWin.course_work.controller;
 
-import com.TeamToWin.course_work.dto.Rule;
+import com.TeamToWin.course_work.dto.Recommendation;
 import com.TeamToWin.course_work.service.RulesService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,26 +16,26 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/rule")
 public class RulesController {
-    private final RulesService rulesService;
+    private final RulesService service;
 
-    public RulesController(RulesService rulesService) {
-        this.rulesService = rulesService;
+    public RulesController( RulesService service) {
+        this.service = service;
     }
+
     @PostMapping
-    public ResponseEntity<Rule> addRule (@RequestMapping Rule){
-        //прописать сохранение
-        return ;
+    public ResponseEntity<Recommendation> addRule (@RequestBody Recommendation recommendation) {
+        return ResponseEntity.of(service.save(recommendation));
     }
 
-    //поправить должен возвращать data
     @GetMapping
-    public ResponseEntity<List<Rule>> getAllRules (){
-        return ;
+    public List<Recommendation> getAllRules (){
+        return service.getAll();
     }
 
     @DeleteMapping("{rule_id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteRule (@PathVariable("rule_id") UUID ruleId) {
-    // прописать удаление
+        service.deleteById(ruleId);
     }
 
 }
