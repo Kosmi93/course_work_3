@@ -62,7 +62,9 @@ public class RuleRepository{
                                     }
                                 },
                     keyHolderRule);
+            recommendationRule.getRule().get(i).setId(keyHolderRule.getKey().longValue());
         }
+        recommendationRule.setId(keyHolderRule.getKey().longValue());
         return recommendationRule;
     }
 
