@@ -12,7 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Repository
@@ -67,5 +69,34 @@ public class RuleRepository{
         recommendationRule.setId(keyHolderRule.getKey().longValue());
         return recommendationRule;
     }
+    public List<RecommendationRule> listRecommendations() {
+        List<RecommendationRule> recommendationRule = jdbcTemplate.query(
+                "select id,product_id as productId,product_name as productName," +
+                        "product_text as productText  from recommendations",
+                (resultSet, rowNum) -> {
+                    RecommendationRule rR = new RecommendationRule();
+                    rR.setId(resultSet.getLong("id"));
+                    rR.setProduct_id(UUID.fromString(resultSet.getString("productId")));
+                    rR.setProduct_name(resultSet.getString("productName"));
+                    rR.setProduct_text(resultSet.getString("productText"));
+                    return rR;
+                });
 
+        return recommendationRule;
+    }
+
+    public List<Rule> getRules(Long id) {
+        List<Rule> rules = jdbcTemplate.query(
+                "select id,query,arguments,negate from rules where recommendation_id = ?",
+                (resultSet, rowNum) -> {
+                    Rule rule = new Rule();
+                    rule.setId(resultSet.getLong("id"));
+                    rule.setQuery(Query.valueOf(resultSet.getString("query")));
+                    rule.setArguments((List<String>) List.of(resultSet.getString("arguments" ).split(",\\s*" )));
+                    rule.setNegate(resultSet.getBoolean("negate"));
+                    return rule;
+                },id);
+
+        return rules;
+    }
 }

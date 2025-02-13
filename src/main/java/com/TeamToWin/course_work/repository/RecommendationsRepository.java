@@ -1,10 +1,13 @@
 package com.TeamToWin.course_work.repository;
 
+import com.TeamToWin.course_work.model.Recommendation;
+import com.TeamToWin.course_work.model.RecommendationRule;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -38,4 +41,77 @@ public class RecommendationsRepository {
         return result != null ? result : 0;
     }
 
+    public boolean checkUserOf(UUID user_id, List<String> arguments, boolean negate) {
+        Boolean result = jdbcTemplate.queryForObject(
+                "SELECT CASE WHEN ( " +
+                        "SELECT COUNT(*) FROM TRANSACTIONS t " +
+                        "INNER JOIN PRODUCTS p ON t.PRODUCT_ID = p.ID " +
+                        "WHERE t.USER_ID = ? " +
+                        "AND p.TYPE = '" + arguments.get(0) + "' " +
+                        ") > 0 then 'true' else 'false' end",
+                Boolean.class,
+                user_id);
+        return result == negate ? true : false;
+    }
+    public boolean checkActiveUserOf(UUID user_id, List<String> arguments, boolean negate) {
+        Boolean result = jdbcTemplate.queryForObject(
+                "SELECT CASE WHEN ( " +
+                        "SELECT COUNT(*) FROM TRANSACTIONS t " +
+                        "INNER JOIN PRODUCTS p ON t.PRODUCT_ID = p.ID " +
+                        "WHERE t.USER_ID = ? " +
+                        "AND p.TYPE = '" + arguments.get(0) + "' " +
+                        ") >= 5 then 'true' else 'false' end",
+                Boolean.class,
+                user_id);
+        return result == negate ? false : true;
+    }
+
+    public boolean checkTransactionSumCompare(UUID user_id, List<String> arguments, boolean negate) {
+        Boolean result = jdbcTemplate.queryForObject(
+                "select case when (" +
+                        "    select count(distinct T.user_id)" +
+                        "    from TRANSACTIONS t" +
+                        "    inner join products p" +
+                        "    where p.type = '" + arguments.get(0) + "'" +
+                        "      and t.USER_ID = ?" +
+                        "      and (select sum(t.AMOUNT)" +
+                        "           from TRANSACTIONS t" +
+                        "           inner join PUBLIC.PRODUCTS P on P.ID = T.PRODUCT_ID" +
+                        "           where p.type = '" + arguments.get(0) + "'" +
+                        "             and t.TYPE = '" + arguments.get(1) + "'" +
+                        "             and t.USER_ID = ?) " + arguments.get(2) + arguments.get(3) +
+                        ") > 0 then 'true' else 'false' end",
+                Boolean.class,
+                user_id,user_id);
+        return result == negate ? true : false;
+    }
+
+    public boolean checkTransactionSumCompareDepositWithdraw(UUID user_id, List<String> arguments, boolean negate) {
+        Boolean result = jdbcTemplate.queryForObject(
+    "select case when (" +
+        "    select count(distinct t.USER_ID)" +
+        "    from TRANSACTIONS t" +
+        "             inner join products p" +
+        "    where p.type != '" + arguments.get(0) + "'" +
+        "      and t.USER_ID = ?" +
+        "      and ((select sum(t.AMOUNT)" +
+        "            from TRANSACTIONS t" +
+        "                     inner join PUBLIC.PRODUCTS p on P.ID = T.PRODUCT_ID" +
+        "            where p.type = '" + arguments.get(0) + "'" +
+        "              and t.TYPE = 'DEPOSIT'" +
+        "              and t.USER_ID = ?) " +
+                       arguments.get(1) + " (select sum(t.AMOUNT)" +
+        "           from TRANSACTIONS t" +
+        "                    inner join PUBLIC.PRODUCTS P on P.ID = T.PRODUCT_ID" +
+        "           where p.type = '" + arguments.get(0) +  "'" +
+        "             and t.TYPE = 'WITHDRAW'" +
+        "             and t.USER_ID = ?)" +
+        "        )" +
+        "    ) > 0 then 'true' else 'false' end",
+                Boolean.class,
+                user_id,
+                user_id,
+                user_id);
+        return result == negate ? true : false;
+    }
 }
