@@ -34,7 +34,8 @@ public class RecommendationsController {
 
     @GetMapping("{usersId}")
     public Optional<UserRecommendation> getListOfRecommendationsForUser(@PathVariable("usersId") UUID usersId) {
-        return recommendationsService.getRecommendations(usersId);
+      //  return recommendationsService.getRecommendations(usersId);
+        return recommendationsService.getRecommendationsRule(usersId);
     }
 
 }
