@@ -33,14 +33,27 @@ public class RulesController {
         return rulesService.addRecommendation(recommendationRule);
     }
     //поправить должен возвращать data
+/*
     @GetMapping
     public ResponseEntity<List<Rule>> getAllRules (){
         return rulesService.getAllRules();
     }
+*/
 
+    @GetMapping
+    public List<RecommendationRule> getAllRecommendations (){
+        return rulesService.getAllRecommendations();
+    }
+
+/*
     @DeleteMapping("{rule_id}")
     public void deleteRule (@PathVariable("rule_id") UUID ruleId) {
         rulesService.deleteRule(ruleId);
     }
+*/
+    @DeleteMapping("{productId}")
+    public void deleteRecommendation (@PathVariable("productId") UUID productId) {
+    rulesService.deleteRecommendation(productId);
+}
 
 }
