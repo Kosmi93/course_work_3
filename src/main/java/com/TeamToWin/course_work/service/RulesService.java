@@ -35,4 +35,12 @@ public class RulesService {
         return ruleRepository.addRecommendations(recommendationRule);
 
     }
+
+    public List<RecommendationRule> getAllRecommendations() {
+        return  ruleRepository.getRecommendationRule();
+    }
+
+    public void deleteRecommendation(UUID productId) {
+        ruleRepository.deleteRecommendation(productId);
+    }
 }

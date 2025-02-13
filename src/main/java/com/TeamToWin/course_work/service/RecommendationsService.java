@@ -49,7 +49,7 @@ public class RecommendationsService {
         List<RecommendationRule> recommendationsRule;
         List<Rule> rulesList;
         Recommendation recommendation;
-        recommendationsRule = ruleRepository.listRecommendations();
+        recommendationsRule = ruleRepository.getRecommendations();
 
         for (RecommendationRule recommendationRule : recommendationsRule) {
             rulesList = ruleRepository.getRules(recommendationRule.getId());
