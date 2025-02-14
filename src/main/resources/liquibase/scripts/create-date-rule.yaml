@@ -18,36 +18,36 @@ databaseChangeLog:
               - column:
                   name: recommendation_id
                   value: 1
-              - insert:
-                  tableName: rules
-                  columns:
-                    - column:
-                        name: query
-                        value: TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW
-                    - column:
-                        name: arguments
-                        value: DEBIT, >
-                    - column:
-                        name: negate
-                        value: true
-                    - column:
-                        name: recommendation_id
-                        value: 1
-              - insert:
-                  tableName: rules
-                  columns:
-                    - column:
-                        name: query
-                        value: TRANSACTION_SUM_COMPARE
-                    - column:
-                        name: arguments
-                        value: DEBIT, WITHDRAW, >, 100000
-                    - column:
-                        name: negate
-                        value: true
-                    - column:
-                        name: recommendation_id
-                        value: 2
+        - insert:
+            tableName: rules
+            columns:
+              - column:
+                  name: query
+                  value: TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW
+              - column:
+                  name: arguments
+                  value: DEBIT, >
+              - column:
+                  name: negate
+                  value: true
+              - column:
+                  name: recommendation_id
+                  value: 1
+        - insert:
+            tableName: rules
+            columns:
+              - column:
+                  name: query
+                  value: TRANSACTION_SUM_COMPARE
+              - column:
+                  name: arguments
+                  value: DEBIT, WITHDRAW, >, 100000
+              - column:
+                  name: negate
+                  value: true
+              - column:
+                  name: recommendation_id
+                  value: 1
           ######
         - insert:
             tableName: rules
@@ -64,36 +64,36 @@ databaseChangeLog:
               - column:
                   name: recommendation_id
                   value: 2
-              - insert:
-                  tableName: rules
-                  columns:
-                    - column:
-                        name: query
-                        value: TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW
-                    - column:
-                        name: arguments
-                        value: DEBIT, >
-                    - column:
-                        name: negate
-                        value: true
-                    - column:
-                        name: recommendation_id
-                        value: 2
-              - insert:
-                  tableName: rules
-                  columns:
-                    - column:
-                        name: query
-                        value: TRANSACTION_SUM_COMPARE
-                    - column:
-                        name: arguments
-                        value: DEBIT, DEPOSIT, >, 50000
-                    - column:
-                        name: negate
-                        value: true
-                    - column:
-                        name: recommendation_id
-                        value: 2
+        - insert:
+            tableName: rules
+            columns:
+              - column:
+                  name: query
+                  value: TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW
+              - column:
+                  name: arguments
+                  value: DEBIT, >
+              - column:
+                  name: negate
+                  value: true
+              - column:
+                  name: recommendation_id
+                  value: 2
+        - insert:
+            tableName: rules
+            columns:
+              - column:
+                  name: query
+                  value: TRANSACTION_SUM_COMPARE
+              - column:
+                  name: arguments
+                  value: DEBIT, DEPOSIT, >, 50000
+              - column:
+                  name: negate
+                  value: true
+              - column:
+                  name: recommendation_id
+                  value: 2
         ######
         - insert:
             tableName: rules
