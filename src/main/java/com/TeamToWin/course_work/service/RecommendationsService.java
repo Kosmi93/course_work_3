@@ -8,6 +8,7 @@ import com.TeamToWin.course_work.model.Rule;
 import com.TeamToWin.course_work.repository.RecommendationsRepository;
 import com.TeamToWin.course_work.repository.RuleRepository;
 import com.TeamToWin.course_work.rule.RecommendationRuleSet;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -42,7 +43,7 @@ public class RecommendationsService {
         }
         return Optional.of(new UserRecommendation(usersId, recommendationsList));
     }
-
+    @Cacheable("getUserRecommendation")
     public Optional<UserRecommendation> getRecommendationsRule(UUID usersId) {
 
         List<Recommendation> recommendationsList = new ArrayList<>();//Список рекомендуемых продуктов

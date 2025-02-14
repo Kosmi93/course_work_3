@@ -18,18 +18,6 @@ public class RulesService {
         this.ruleRepository = ruleRepository;
     }
 
-    public ResponseEntity<List<Rule>> getAllRules() {
-        return null;
-    }
-
-    public ResponseEntity<Rule> addRule(Rule rule) {
-        return null;
-
-    }
-
-    public void deleteRule(UUID ruleId) {
-
-    }
 
     public RecommendationRule addRecommendation(RecommendationRule recommendationRule) {
         return ruleRepository.addRecommendations(recommendationRule);

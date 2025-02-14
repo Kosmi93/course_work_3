@@ -1,24 +1,15 @@
 package com.TeamToWin.course_work.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
+
 public class Rule {
     private Long id;
-//    @Enumerated(EnumType.STRING)
     private Query query;
-//    @ElementCollection
     private List<String> arguments;
     private boolean negate;
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "id")
-//    private Recommendations recommendations;
+
 
 
     public Rule() {
