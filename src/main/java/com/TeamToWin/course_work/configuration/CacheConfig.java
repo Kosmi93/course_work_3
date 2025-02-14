@@ -15,7 +15,7 @@ public class CacheConfig {
 
     @Bean
     public CacheManager cacheManager() {                        // написать имена соответствующие классам
-        CaffeineCacheManager cacheManager = new CaffeineCacheManager("myCache1","myCache2","myCache3");
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager("getUserRecommendation");
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
     }
