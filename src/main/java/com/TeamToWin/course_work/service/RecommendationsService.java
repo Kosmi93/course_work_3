@@ -89,9 +89,9 @@ public class RecommendationsService {
 //            if (flag && (count_flag_true == rulesList.size())
             if (flag && (count_flag_true == rulesList.size())
             ) {
-                recommendation = new Recommendation(recommendationRule.getProduct_id(),
-                        recommendationRule.getProduct_name(),
-                        recommendationRule.getProduct_text());
+                recommendation = new Recommendation(recommendationRule.getProductId(),
+                        recommendationRule.getProductName(),
+                        recommendationRule.getProductText());
                 recommendationsList.add(recommendation);
             }
         }

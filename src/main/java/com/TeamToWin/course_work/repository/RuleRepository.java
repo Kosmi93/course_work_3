@@ -32,7 +32,7 @@ public class RuleRepository {
 
                         ") > 0 then 'true' else 'false' end",
                 Boolean.class,
-                recommendationRule.getProduct_id());
+                recommendationRule.getProductId());
         if (!result) {
             String insertIntoRecommendation = "INSERT into recommendations (product_id,product_name,product_text) VALUES(?,?,?)";
             KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -40,9 +40,9 @@ public class RuleRepository {
             jdbcTemplate.update(new PreparedStatementCreator() {
                                     public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
                                         PreparedStatement ps = connection.prepareStatement(insertIntoRecommendation, new String[]{"id"});
-                                        ps.setObject(1, recommendationRule.getProduct_id());
-                                        ps.setString(2, recommendationRule.getProduct_name());
-                                        ps.setString(3, recommendationRule.getProduct_text());
+                                        ps.setObject(1, recommendationRule.getProductId());
+                                        ps.setString(2, recommendationRule.getProductName());
+                                        ps.setString(3, recommendationRule.getProductText());
                                         return ps;
                                     }
                                 },
@@ -87,9 +87,9 @@ public class RuleRepository {
                 (resultSet, rowNum) -> {
                     RecommendationRule rR = new RecommendationRule();
                     rR.setId(resultSet.getLong("id"));
-                    rR.setProduct_id(UUID.fromString(resultSet.getString("productId")));
-                    rR.setProduct_name(resultSet.getString("productName"));
-                    rR.setProduct_text(resultSet.getString("productText"));
+                    rR.setProductId(UUID.fromString(resultSet.getString("productId")));
+                    rR.setProductName(resultSet.getString("productName"));
+                    rR.setProductText(resultSet.getString("productText"));
                     return rR;
                 });
 
