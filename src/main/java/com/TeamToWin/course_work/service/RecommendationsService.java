@@ -86,7 +86,6 @@ public class RecommendationsService {
                 }
 */
             }
-//            if (flag && (count_flag_true == rulesList.size())
             if (flag && (count_flag_true == rulesList.size())
             ) {
                 recommendation = new Recommendation(recommendationRule.getProductId(),
