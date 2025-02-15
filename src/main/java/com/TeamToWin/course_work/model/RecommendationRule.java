@@ -1,26 +1,24 @@
 package com.TeamToWin.course_work.model;
 
-import jakarta.persistence.Entity;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 public class RecommendationRule {
     private Long id;
-    private String product_name;
-    private UUID product_id;
-    private String product_text;
+    private String productName;
+    private UUID productId;
+    private String productText;
     private List<Rule> rule;
 
     public RecommendationRule() {
     }
 
-    public RecommendationRule(Long id, String product_name, UUID product_id, String product_text, List<Rule> rule) {
+    public RecommendationRule(Long id, String productName, UUID productId, String productText, List<Rule> rule) {
         this.id = id;
-        this.product_name = product_name;
-        this.product_id = product_id;
-        this.product_text = product_text;
+        this.productName = productName;
+        this.productId = productId;
+        this.productText = productText;
         this.rule = rule;
     }
 
@@ -28,12 +26,12 @@ public class RecommendationRule {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         RecommendationRule that = (RecommendationRule) o;
-        return Objects.equals(id, that.id) && Objects.equals(product_name, that.product_name) && Objects.equals(product_id, that.product_id) && Objects.equals(product_text, that.product_text) && Objects.equals(rule, that.rule);
+        return Objects.equals(id, that.id) && Objects.equals(productName, that.productName) && Objects.equals(productId, that.productId) && Objects.equals(productText, that.productText) && Objects.equals(rule, that.rule);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, product_name, product_id, product_text, rule);
+        return Objects.hash(id, productName, productId, productText, rule);
     }
 
     public Long getId() {
@@ -44,28 +42,28 @@ public class RecommendationRule {
         this.id = id;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public UUID getProduct_id() {
-        return product_id;
+    public UUID getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(UUID product_id) {
-        this.product_id = product_id;
+    public void setProductId(UUID productId) {
+        this.productId = productId;
     }
 
-    public String getProduct_text() {
-        return product_text;
+    public String getProductText() {
+        return productText;
     }
 
-    public void setProduct_text(String product_text) {
-        this.product_text = product_text;
+    public void setProductText(String productText) {
+        this.productText = productText;
     }
 
     public List<Rule> getRule() {
