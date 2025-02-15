@@ -115,7 +115,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: query
-                  value: TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW
+                  value: USER_OF
               - column:
                   name: arguments
                   value: INVEST
