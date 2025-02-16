@@ -7,8 +7,8 @@ public enum Query {
     TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW("TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW");
 
     private String query;
-
     Query(String query) {
         this.query = query;
     }
+
 }
