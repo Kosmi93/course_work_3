@@ -22,12 +22,22 @@ public class RecommendationsService {
     private final RecommendationsRepository recommendationRepository;
 
     private List<RecommendationRuleSet> recommendationsRuleSetList;
+    Map<Query, AllQuery> queryMap= new HashMap<Query, AllQuery>();
 
     public RecommendationsService(List<RecommendationRuleSet> recommendationsRuleSetList, RuleRepository ruleRepository,
                                   RecommendationsRepository recommendationRepository) {
         this.recommendationsRuleSetList = recommendationsRuleSetList;
         this.ruleRepository = ruleRepository;
         this.recommendationRepository = recommendationRepository;
+        AllQuery userOfQuery = new UserOfQuery(recommendationRepository);
+        AllQuery activeUserOfQuery = new ActiveUserOfQuery(recommendationRepository);
+        AllQuery sumCompareDWQuery = new SumCompareDWQuery(recommendationRepository);
+        AllQuery transactionSumCompareQuery = new TransactionSunCompareQuery(recommendationRepository);
+        queryMap.put(Query.USER_OF, userOfQuery);
+        queryMap.put(Query.ACTIVE_USER_OF, activeUserOfQuery);
+        queryMap.put(Query.TRANSACTION_SUM_COMPARE, transactionSumCompareQuery);
+        queryMap.put(Query.TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW, sumCompareDWQuery);
+
     }
 
     public Optional<UserRecommendation> getRecommendations(UUID usersId) {
@@ -48,16 +58,6 @@ public class RecommendationsService {
         List<Rule> rulesList;
         Recommendation recommendation;
         recommendationsRule = ruleRepository.getRecommendations();
-
-        Map<Query, AllQuery> queryMap= new HashMap<Query, AllQuery>();
-        AllQuery userOfQuery = new UserOfQuery(recommendationRepository);
-        AllQuery activeUserOfQuery = new ActiveUserOfQuery(recommendationRepository);
-        AllQuery sumCompareDWQuery = new SumCompareDWQuery(recommendationRepository);
-        AllQuery transactionSumCompareQuery = new TransactionSunCompareQuery(recommendationRepository);
-        queryMap.put(Query.USER_OF, userOfQuery);
-        queryMap.put(Query.ACTIVE_USER_OF, activeUserOfQuery);
-        queryMap.put(Query.TRANSACTION_SUM_COMPARE, transactionSumCompareQuery);
-        queryMap.put(Query.TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW, sumCompareDWQuery);
 
 
 
