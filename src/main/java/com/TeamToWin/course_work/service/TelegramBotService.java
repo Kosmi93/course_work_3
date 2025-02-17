@@ -6,10 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class TelegramBotService {
     private final TelegramBotUpdatesListener listener;
+    private final RecommendationsService recommendationsService;
 
-
-    public TelegramBotService(TelegramBotUpdatesListener listener) {
+    public TelegramBotService(TelegramBotUpdatesListener listener, RecommendationsService recommendationsService) {
         this.listener = listener;
+        this.recommendationsService = recommendationsService;
     }
 
 
@@ -17,6 +18,10 @@ public class TelegramBotService {
         if(!text.isEmpty()){
             if (text.charAt(0)=='/') {
                 if(text.equals("/recommend")){
+                    listener.sendingMessage(chatId,"Пока так");
+                }
+                if(text.equals("/r")){
+                    System.out.println(recommendationsService.getUser("sheron.berge"));
                     listener.sendingMessage(chatId,"Пока так");
                 }
             }

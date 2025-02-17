@@ -1,5 +1,6 @@
 package com.TeamToWin.course_work.repository;
 
+import com.TeamToWin.course_work.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,23 @@ public class RecommendationsRepository {
     public RecommendationsRepository(@Qualifier("recommendationsJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+    public List<UserDTO> getUser(String username) {
+        List<UserDTO> userDTOList = jdbcTemplate.query(
+                "select * from USERS where username = ?",
+                (resultSet, rowNum) -> {
+                    UserDTO userDTO = new UserDTO();
+                    userDTO.setId(UUID.fromString(resultSet.getString("id")));
+                    userDTO.setUsername(resultSet.getString("username"));
+                    userDTO.setFirstName(resultSet.getString("first_name"));
+                    userDTO.setLastName(resultSet.getString("last_name"));
+                    return userDTO;
+                }, username);
+
+        return userDTOList;
+    }
+
+
 
     public boolean haveProductType(UUID userId,String typeProduct) {
         Integer result = jdbcTemplate.queryForObject(
