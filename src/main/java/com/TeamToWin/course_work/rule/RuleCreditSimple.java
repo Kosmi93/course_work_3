@@ -10,26 +10,28 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
- *Реализация интерфейса RecommendationRuleSet для  продукта Простой кредит
+ * Реализация интерфейса RecommendationRuleSet для  продукта Простой кредит
  * Пользователь не использует продукты с типом CREDIT.
  * Сумма пополнений по всем продуктам типа DEBIT больше, чем сумма трат по всем продуктам типа DEBIT.
  * Сумма трат по всем продуктам типа DEBIT больше, чем 100 000 ₽.
  */
 
 @Component
-public class RuleCreditSimple implements RecommendationRuleSet{
+public class RuleCreditSimple implements RecommendationRuleSet {
     private final RecommendationsRepository recommendationsRepository;
+
     public RuleCreditSimple(RecommendationsRepository recommendationsRepository) {
-        this.recommendationsRepository = recommendationsRepository;}
+        this.recommendationsRepository = recommendationsRepository;
+    }
+
     @Override
     public Optional<Recommendation> getRecommendations(UUID usersId) {
 
-       if (!recommendationsRepository.haveProductType(usersId,"CREDIT") &&
-                recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT")
-                        > recommendationsRepository.getSumAmount(usersId,"DEBIT","WITHDRAW") &&
-                recommendationsRepository.getSumAmount(usersId,"DEBIT","DEPOSIT") > 100_000
-        )
-        {
+        if (!recommendationsRepository.haveProductType(usersId, "CREDIT") &&
+                recommendationsRepository.getSumAmount(usersId, "DEBIT", "DEPOSIT")
+                        > recommendationsRepository.getSumAmount(usersId, "DEBIT", "WITHDRAW") &&
+                recommendationsRepository.getSumAmount(usersId, "DEBIT", "DEPOSIT") > 100_000
+        ) {
             return Optional.of(new Recommendation(
                     UUID.fromString("ab138afb-f3ba-4a93-b74f-0fcee86d447f"),
                     "Простой кредит",

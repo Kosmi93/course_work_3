@@ -24,18 +24,17 @@ import java.util.UUID;
 @RequestMapping("/recommendation")
 public class RecommendationsController {
 
-    private final RecommendationsRepository recommendationsRepository;
+
     private final RecommendationsService recommendationsService;
 
-    public RecommendationsController(RecommendationsRepository recommendationsRepository,
-                                     RecommendationsService recommendationsService) {
-        this.recommendationsRepository = recommendationsRepository;
+    public RecommendationsController(RecommendationsService recommendationsService) {
+
         this.recommendationsService = recommendationsService;
     }
 
     @GetMapping("{usersId}")
     public Optional<UserRecommendation> getListOfRecommendationsForUser(@PathVariable("usersId") UUID usersId) {
-        return recommendationsService.getRecommendations(usersId);
+        return recommendationsService.getRecommendationsRule(usersId);
     }
 
 }

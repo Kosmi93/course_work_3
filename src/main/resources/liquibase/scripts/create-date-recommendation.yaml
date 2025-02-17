@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-recommendations
+      author: kosmi23
+      changes:
+        - insert:
+            tableName: recommendations
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: product_name
+                  value: Простой кредит
+              - column:
+                  name: product_id
+                  value: ab138afb-f3ba-4a93-b74f-0fcee86d447f
+              - column:
+                  name: product_text
+                  value: Откройте мир выгодных кредитов с нами
+        - insert:
+            tableName: recommendations
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: product_name
+                  value: Top Saving
+              - column:
+                  name: product_id
+                  value: 59efc529-2fff-41af-baff-90ccd7402925
+              - column:
+                  name: product_text
+                  value: Откройте свою собственную Копилку
+        - insert:
+            tableName: recommendations
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: product_name
+                  value: Invest 500
+              - column:
+                  name: product_id
+                  value: 147f6a0f-3b91-413b-ab99-87f081d60d5a
+              - column:
+                  name: product_text
+                  value: Откройте свой путь к успеху
