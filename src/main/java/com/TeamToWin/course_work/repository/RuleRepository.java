@@ -1,5 +1,6 @@
 package com.TeamToWin.course_work.repository;
 
+import com.TeamToWin.course_work.dto.UserDTO;
 import com.TeamToWin.course_work.model.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +23,8 @@ public class RuleRepository {
     public RuleRepository(@Qualifier("defaultJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+
 
     public RecommendationRule addRecommendations(RecommendationRule recommendationRule) {
 

@@ -1,5 +1,6 @@
 package com.TeamToWin.course_work.service;
 
+import com.TeamToWin.course_work.dto.UserDTO;
 import com.TeamToWin.course_work.model.RecommendationRule;
 import com.TeamToWin.course_work.model.Rule;
 import com.TeamToWin.course_work.repository.RuleRepository;
@@ -31,4 +32,6 @@ public class RulesService {
     public void deleteRecommendation(UUID productId) {
         ruleRepository.deleteRecommendation(productId);
     }
+
+
 }

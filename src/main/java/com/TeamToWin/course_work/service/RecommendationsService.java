@@ -1,5 +1,6 @@
 package com.TeamToWin.course_work.service;
 
+import com.TeamToWin.course_work.dto.UserDTO;
 import com.TeamToWin.course_work.dto.UserRecommendation;
 import com.TeamToWin.course_work.model.*;
 import com.TeamToWin.course_work.repository.RecommendationsRepository;
@@ -67,12 +68,24 @@ public class RecommendationsService {
             int count_flag_true = 0;
             for (Rule rule : rulesList) {
                  flag = queryMap.get(rule.getQuery()).checkQuery(usersId, rule.getArguments(), rule.isNegate());
-                if (flag) {
-                    count_flag_true++;
-                } else {
-                    break;
-                }
+                 if (flag) {
+                     count_flag_true++;}
 
+/*
+                if (rule.getQuery() == Query.USER_OF) {
+                    flag = recommendationRepository.checkUserOf(usersId, rule.getArguments(), rule.isNegate());
+                    if (flag) {count_flag_true++;}
+                } else if (rule.getQuery() == Query.ACTIVE_USER_OF) {
+                    flag = recommendationRepository.checkActiveUserOf(usersId, rule.getArguments(), rule.isNegate());
+                    if (flag) {count_flag_true++;}
+                } else if (rule.getQuery() == Query.TRANSACTION_SUM_COMPARE) {
+                    flag = recommendationRepository.checkTransactionSumCompare(usersId, rule.getArguments(), rule.isNegate());
+                    if (flag) {count_flag_true++;}
+                } else if (rule.getQuery() == Query.TRANSACTION_SUM_COMPARE_DEPOSIT_WITHDRAW) {
+                    flag = recommendationRepository.checkTransactionSumCompareDepositWithdraw(usersId, rule.getArguments(), rule.isNegate());
+                    if (flag) {count_flag_true++;}
+                }
+*/
             }
             if (flag && (count_flag_true == rulesList.size())
             ) {
@@ -86,4 +99,6 @@ public class RecommendationsService {
         return Optional.of(new UserRecommendation(usersId, recommendationsList));
 
     }
+
+    public  List<UserDTO> getUser(String userName) { return recommendationRepository.getUser(userName); }
 }
