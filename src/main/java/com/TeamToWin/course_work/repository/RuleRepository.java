@@ -149,5 +149,9 @@ public class RuleRepository {
         return new Stats(stats);
     }
 
+    public void updateStats(UUID productId) {
+        jdbcTemplate.update("UPDATE recommendations SET count = count + 1 where product_id = ? ",productId);
+    }
+
 
 }
