@@ -24,7 +24,10 @@ public class TelegramBotService {
         if (!text.isEmpty()) {
             if (text.charAt(0) == '/') {
                 String[] comands = text.split(" ");
-                if (comands[0].equals("/recommend")) {
+                if (comands[0].equals("/start")) {
+                    listener.sendingMessage(chatId, "Здравствуйте! Для получения информации по банковским продуктам введите \"/recommend <username>\"");
+                }else
+                if (comands[0].equals("/recommend") && comands.length > 1) {
                     List<UserDTO> users = recommendationsService.getUser(comands[1]);
                     if (users.size() > 1 || users.isEmpty()) {
                         listener.sendingMessage(chatId, "Пользователь не найден");
