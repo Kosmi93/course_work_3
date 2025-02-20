@@ -8,6 +8,7 @@ import com.TeamToWin.course_work.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ public class ManagerController {
     @Autowired
     private ManagerService managerService;
 
-
+    @CacheEvict(value = "getUserRecommendation", allEntries = true)
     @PostMapping("/clear-caches")
     public void clearCaches() {
         managerService.clearCaches();
