@@ -129,4 +129,5 @@ public class RecommendationsRepository {
                 user_id);
         return result == negate ? true : false;
     }
+
 }
