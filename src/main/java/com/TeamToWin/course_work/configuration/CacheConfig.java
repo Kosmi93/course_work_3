@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class CacheConfig {
 
     @Bean
-    public CacheManager cacheManager() {                        // написать имена соответствующие классам
+    public CacheManager cacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager("getUserRecommendation");
         cacheManager.setCaffeine(caffeineCacheBuilder());
         return cacheManager;
@@ -22,7 +22,8 @@ public class CacheConfig {
 
     Caffeine<Object, Object> caffeineCacheBuilder() {
         return Caffeine.newBuilder()
-                .expireAfterWrite(10, TimeUnit.MINUTES) // Устанавливаем время жизни записи в кэше
-                .maximumSize(100); // Максимальное количество элементов в кэше
+                .expireAfterWrite(10, TimeUnit.MINUTES)
+                .maximumSize(100);
     }
+
 }

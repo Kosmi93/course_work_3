@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class TelegramBotService {
@@ -23,34 +22,33 @@ public class TelegramBotService {
 
 
     public void setTask(Long chatId, String text) {
-        if(!text.isEmpty()){
-            if (text.charAt(0)=='/') {
+        if (!text.isEmpty()) {
+            if (text.charAt(0) == '/') {
                 String[] comands = text.split(" ");
-                if(comands[0].equals("/recommend")){
+                if (comands[0].equals("/recommend")) {
                     List<UserDTO> users = recommendationsService.getUser(comands[1]);
-                    if(users.size()>1 || users.isEmpty()){
-                        listener.sendingMessage(chatId,"Пользователь не найден");
+                    if (users.size() > 1 || users.isEmpty()) {
+                        listener.sendingMessage(chatId, "Пользователь не найден");
                     } else {
-                        listener.sendingMessage(chatId,getTextRecommendations(users.get(0)));
+                        listener.sendingMessage(chatId, getTextRecommendations(users.get(0)));
                     }
-                }else {
-                    listener.sendingMessage(chatId,"Неизвестная команда");
+                } else {
+                    listener.sendingMessage(chatId, "Неизвестная команда");
                 }
             }
         }
     }
 
     private String getTextRecommendations(UserDTO user) {
-        Optional<UserRecommendation> userRecommendation =recommendationsService
-            .getRecommendationsRule(user.getId());
+        Optional<UserRecommendation> userRecommendation = recommendationsService
+                .getRecommendationsRule(user.getId());
         StringBuilder result = new StringBuilder();
         result.append("Здравствуйте ");
-        result.append(user.getFirstName()+" "+user.getLastName()+'\n');
+        result.append(user.getFirstName() + " " + user.getLastName() + '\n');
         result.append("Новые продукты для вас:");
         result.append('\n');
         result.append('\n');
         if (userRecommendation.isPresent()) {
-            // добавить красивый вывод рекомендаций
             for (Recommendation recommendation : userRecommendation.get().getRecommendations()) {
                 result.append(recommendation.getProductName());
                 result.append('\n');
@@ -58,8 +56,7 @@ public class TelegramBotService {
                 result.append('\n');
                 result.append('\n');
             }
-
-        }else {
+        } else {
             result.append("Для вас новых продуктов не найдено");
         }
         return result.toString();
