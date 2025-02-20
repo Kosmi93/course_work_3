@@ -32,7 +32,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
     @Override
     public int process(List<Update> updates) {
         updates.forEach(update -> {
-
+            String msg = update.message().text();
             if (update.message() != null) {
                 controller.setTask(update.message().chat().id(), update.message().text());
             }

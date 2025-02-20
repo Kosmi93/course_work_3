@@ -149,5 +149,13 @@ public class RuleRepository {
         return new Stats(stats);
     }
 
+    public void updateStats(UUID productId) {
+        int count = jdbcTemplate.queryForObject(
+                "select count from recommendations where product_id = ?",Integer.class,
+                productId);
+        count++;
+        jdbcTemplate.update("UPDATE recommendations SET count = ? where product_id = ? ", count,productId);
+    }
+
 
 }
