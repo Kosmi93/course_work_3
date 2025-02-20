@@ -6,7 +6,6 @@ import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import jakarta.annotation.PostConstruct;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -34,7 +33,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         updates.forEach(update -> {
             String msg = update.message().text();
             if (update.message() != null) {
-                controller.setTask(update.message().chat().id(), update.message().text());
+                controller.getTask(update.message().chat().id(), update.message().text());
             }
             System.out.println(update.message());
         });
