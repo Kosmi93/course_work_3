@@ -1,5 +1,7 @@
 package com.TeamToWin.course_work.repository;
 
+import com.TeamToWin.course_work.dto.Stats;
+import com.TeamToWin.course_work.model.Stat;
 import com.TeamToWin.course_work.model.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +24,8 @@ public class RuleRepository {
     public RuleRepository(@Qualifier("defaultJdbcTemplate") JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+
 
     public RecommendationRule addRecommendations(RecommendationRule recommendationRule) {
 
@@ -129,4 +133,25 @@ public class RuleRepository {
                 ")", productId);
         jdbcTemplate.update("DELETE FROM recommendations where product_id = ?", productId);
     }
+
+
+
+    public Stats getStats() {
+        List<Stat> stats = jdbcTemplate.query(
+                "select product_id ,count from recommendations",
+                (resultSet, rowNum) -> {
+                    Stat stat = new Stat();
+                    stat.setRule_id(resultSet.getString("product_id"));
+                    stat.setCount(resultSet.getInt("count"));
+                    return stat;
+                });
+
+        return new Stats(stats);
+    }
+
+    public void updateStats(UUID productId) {
+        jdbcTemplate.update("UPDATE recommendations SET count = count + 1 where product_id = ? ",productId);
+    }
+
+
 }

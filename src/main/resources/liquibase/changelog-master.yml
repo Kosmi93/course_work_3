@@ -1,7 +1,9 @@
 databaseChangeLog:
   - include:
       file: liquibase/scripts/create-recommendation-table.sql
-  #- include:
-#      file: liquibase/scripts/create-date-recommendation.yaml
-#  - include:
-#      file: liquibase/scripts/create-date-rule.yaml
+  - include:
+      file: liquibase/scripts/changeset.yml
+  - include:
+      file: liquibase/scripts/create-date-recommendation.yaml
+  - include:
+      file: liquibase/scripts/create-date-rule.yaml

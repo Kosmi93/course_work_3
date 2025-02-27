@@ -1,9 +1,8 @@
 package com.TeamToWin.course_work.service;
 
+import com.TeamToWin.course_work.dto.Stats;
 import com.TeamToWin.course_work.model.RecommendationRule;
-import com.TeamToWin.course_work.model.Rule;
 import com.TeamToWin.course_work.repository.RuleRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,5 +29,10 @@ public class RulesService {
 
     public void deleteRecommendation(UUID productId) {
         ruleRepository.deleteRecommendation(productId);
+    }
+
+
+    public Stats getStats() {
+        return ruleRepository.getStats();
     }
 }
