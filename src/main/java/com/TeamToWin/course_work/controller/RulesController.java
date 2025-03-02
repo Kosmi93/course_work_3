@@ -26,7 +26,6 @@ public class RulesController {
     public RecommendationRule addRecommendation(@RequestBody RecommendationRule recommendationRule) {
         return rulesService.addRecommendation(recommendationRule);
     }
-    //поправить должен возвращать data
 
     @GetMapping
     public List<RecommendationRule> getAllRecommendations() {

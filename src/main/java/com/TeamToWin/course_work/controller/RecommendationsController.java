@@ -1,10 +1,6 @@
 package com.TeamToWin.course_work.controller;
 
-/*
-import com.TeamToWin.course_work.repository.RecommendationsRepository;
-import com.TeamToWin.course_work.rule.RecommendationRuleSet;
-import com.TeamToWin.course_work.service.RecommendationsService;
-*/
+
 import com.TeamToWin.course_work.dto.UserRecommendation;
 import com.TeamToWin.course_work.repository.RecommendationsRepository;
 import com.TeamToWin.course_work.service.RecommendationsService;
